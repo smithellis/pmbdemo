@@ -3,7 +3,7 @@ class Location < ActiveRecord::Base
 
   has_one :salesrep, :dependent => :nullify
 
-  validates_presence_of :name, :line_1, :city, :state, :zip
+  validates_presence_of :name, :line_1, :city, :state, :zip_code
 
   def self.all_available(options = {})
     all.select { |loc| (loc.available? || loc.salesrep == options[:to])}
