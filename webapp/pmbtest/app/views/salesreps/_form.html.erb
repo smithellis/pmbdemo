@@ -1,0 +1,26 @@
+<%= form_for(@salesrep) do |f| %>
+  <% if @salesrep.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@salesrep.errors.count, "error") %> prohibited this salesrep from being saved:</h2>
+
+      <ul>
+      <% @salesrep.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

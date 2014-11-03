@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First name:</b>
+  <%= @salesrep.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @salesrep.last_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_salesrep_path(@salesrep) %> |
+<%= link_to 'Back', salesreps_path %>

@@ -1,0 +1,52 @@
+#! /usr/bin/env ruby
+# We start with a hash of companies and their ranges.  This could be read in from a file,
+# but since provided we'll hard code it here.
+	$companies = Hash.new( "companies" )
+	$companies ={"Company A"=>1000..3000,"Company B"=>6000..10000,"Company C"=>500..2500}
+
+
+class Matcher
+# A quick function to check if the ranges have overlap
+	def overlap?(r1, r2)
+  		r1.include?(r2.begin) || r2.include?(r1.begin)
+	end 
+
+# We need to be sure we collect a number.  Using to_i by itself
+# can let garbage in - 999gdfdf would get cast succesfully by to_i, for instance.  So let's test 
+# that the input is a number and only contains numbers.  We'll also see if we just get a newline/return/enter.
+# Then we can cast it.  
+	def user_interact()
+		lownum=false
+		highnum=false
+		# Collect our low number and validate while doing so
+		while !(lownum =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/) && !(lownum=='') do	
+			puts "Enter a number for your low range.  No '$' symbol is needed.  Press enter if you have no low selection."
+			lownum=gets.chomp
+		end
+		# Collect our high number and validate
+		while !(highnum =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/) && !(highnum=='') do	
+			puts "Enter a number for your high range.  No '$' symbol is needed.  Press enter if you have no high selection."
+			highnum=gets.chomp
+		end
+		# If we collected returns, lets deal with that
+		if lownum==""
+			lownum=0
+		end
+		if highnum==''
+			highnum=10000
+		end
+	# Lets make sure we're dealing with floats now (people may enter decimals, so we'll handle it)
+		lownum = lownum.to_f
+		highnum= highnum.to_f
+
+	# Now we compare the input range to the company ranges and spit out matches
+		$companies.each do | company, comprng |
+			if overlap?(comprng,lownum..highnum)
+				puts "#{company} Matches"
+			end
+		end	
+	end
+end
+
+match = Matcher.new
+match.user_interact

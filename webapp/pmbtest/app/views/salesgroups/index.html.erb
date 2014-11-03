@@ -1,0 +1,23 @@
+<h1>Listing salesgroups</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @salesgroups.each do |salesgroup| %>
+  <tr>
+    <td><%= salesgroup.description %></td>
+    <td><%= link_to 'Show', salesgroup %></td>
+    <td><%= link_to 'Edit', edit_salesgroup_path(salesgroup) %></td>
+    <td><%= link_to 'Destroy', salesgroup, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Salesgroup', new_salesgroup_path %>
